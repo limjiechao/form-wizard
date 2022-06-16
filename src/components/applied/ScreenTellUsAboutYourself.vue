@@ -45,12 +45,15 @@ const age = ref<number>(20);
 
 const country = ref<Country>('Hong Kong');
 
+// NOTE: Derive currency from country
 const currency = computed<Currency>(() => countryToCurrency[country.value]);
 
+// NOTE: Derive standard premium denominated in country's currency
 const standardPremium = computed<number>(
   () => 10 * age.value * rate[currency.value]
 );
 
+// NOTE: Calculate `Safe` and `Super Safe` premium dynamically
 const packageToAdditionalPremium = computed<Record<PackageType, number>>(
   () => ({
     Standard: 0,
@@ -59,6 +62,7 @@ const packageToAdditionalPremium = computed<Record<PackageType, number>>(
   })
 );
 
+// NOTE: Reflect dynamic `Safe` and `Super Safe` premium in the form
 const packageOptions = computed<PackageOptions>(() => [
   {
     id: 'package-standard',
@@ -85,6 +89,8 @@ const packageOptions = computed<PackageOptions>(() => [
 ]);
 
 const selectedPackage = ref<PackageType>('Safe');
+
+// NOTE: Calculate premium of selected package formatted to two decimal places
 const selectedPackagePremium = computed<string>(() =>
   ((selectedPackagePremium) =>
     selectedPackagePremium > 0
@@ -101,6 +107,7 @@ const updateFormData = (event: Event) => {
   formData.value = new FormData(event.currentTarget as HTMLFormElement);
 };
 
+// NOTE: Get form data as key-value pairs
 const retrievedFormData = computed(() =>
   Object.fromEntries(formData.value.entries())
 );
@@ -131,6 +138,8 @@ const checkRequiredFields = () => {
 const emit = defineEmits<{
   (event: typeof submitFormDataEventName, formData: RetrievedFormData): void;
 }>();
+
+// NOTE: Only emit form data if validated
 const submitFormData = () => {
   if (allFieldsAreFilled.value && isAgeMinimumOrMore.value) {
     emit(submitFormDataEventName, retrievedFormData.value);

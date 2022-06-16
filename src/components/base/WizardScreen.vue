@@ -35,9 +35,12 @@ const goToNextScreen = ($event: ScreenName) => {
   if (canContinue.value) {
     emit(
       goToNextScreenEventName,
+      // NOTE: Bypass to a different screen if value is not falsy
+      // NOTE: For sending user over 100 to `ScreenAgeError` screen
       redirectToScreen?.value ? redirectToScreen.value : $event
     );
   } else {
+    // NOTE: Notify `ScreenTellUsAboutYourself` so it can trigger browser form validation
     emit(cannotContinueEventName);
   }
 };
