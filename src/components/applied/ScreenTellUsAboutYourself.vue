@@ -9,6 +9,7 @@ import {
   FieldLabel,
   FieldName,
   maximumAge,
+  maximumPolicyAge,
   minimumAge,
   PackageOptions,
   PackageType,
@@ -53,13 +54,18 @@ const standardPremium = computed<number>(
   () => 10 * age.value * rate[currency.value]
 );
 
+const withinInsurableAge = computed<boolean>(
+  () => age.value > minimumAge && age.value <= maximumPolicyAge
+);
+
 // NOTE: Calculate `Safe` and `Super Safe` premium dynamically
-const packageToAdditionalPremium = computed<Record<PackageType, number>>(
-  () => ({
+// NOTE: If not within insurable age, simply show 0
+const packageToAdditionalPremium = computed<Record<PackageType, number>>(() =>
+  ((standardPremium) => ({
     Standard: 0,
-    Safe: standardPremium.value > 0 ? standardPremium.value * 0.5 : 0,
-    'Super Safe': standardPremium.value > 0 ? standardPremium.value * 0.75 : 0,
-  })
+    Safe: standardPremium * 0.5,
+    'Super Safe': standardPremium * 0.75,
+  }))(withinInsurableAge.value ? standardPremium.value : 0)
 );
 
 // NOTE: Reflect dynamic `Safe` and `Super Safe` premium in the form
@@ -91,9 +97,10 @@ const packageOptions = computed<PackageOptions>(() => [
 const selectedPackage = ref<PackageType>('Safe');
 
 // NOTE: Calculate premium of selected package formatted to two decimal places
+// NOTE: If not within insurable age, simply show 0
 const selectedPackagePremium = computed<string>(() =>
   ((selectedPackagePremium) =>
-    selectedPackagePremium > 0
+    withinInsurableAge.value
       ? toTwoDecimalPlaces(selectedPackagePremium)
       : '0')(
     standardPremium.value +

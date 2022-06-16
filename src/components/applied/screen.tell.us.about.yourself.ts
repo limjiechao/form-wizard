@@ -1,5 +1,6 @@
 export const minimumAge = 1 as const;
 export const maximumAge = 150 as const;
+export const maximumPolicyAge = 100 as const;
 
 export type Country = 'Australia' | 'Hong Kong' | 'USA';
 
