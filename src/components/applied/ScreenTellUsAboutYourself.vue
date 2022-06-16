@@ -13,6 +13,7 @@ import {
   PackageOptions,
   PackageType,
   rate,
+  toTwoDecimalPlaces,
 } from './screen.tell.us.about.yourself';
 import { ScreenTellUsAboutYourself } from './screen.configurations';
 import { submitFormDataEventName } from '../base/custom.event.names';
@@ -50,20 +51,26 @@ const packageOptions = computed<PackageOptions>(() => [
     id: 'package-safe',
     name: 'Safe',
     value: 'Safe',
-    description: `+${packageToAdditionalPremium.value['Safe']} ${currency.value}, 50%`,
+    description: `+${toTwoDecimalPlaces(
+      packageToAdditionalPremium.value['Safe']
+    )} ${currency.value}, 50%`,
   },
   {
     id: 'package-super-safe',
     name: 'Super Safe',
     value: 'Super Safe',
-    description: `+${packageToAdditionalPremium.value['Super Safe']} ${currency.value}, 75%`,
+    description: `+${toTwoDecimalPlaces(
+      packageToAdditionalPremium.value['Super Safe']
+    )} ${currency.value}, 75%`,
   },
 ]);
 
 const selectedPackage = ref<PackageType>('Safe');
 const selectedPackagePremium = computed<string>(() =>
   ((selectedPackagePremium) =>
-    selectedPackagePremium > 0 ? selectedPackagePremium.toFixed(2) : '0')(
+    selectedPackagePremium > 0
+      ? toTwoDecimalPlaces(selectedPackagePremium)
+      : '0')(
     standardPremium.value +
       packageToAdditionalPremium.value[selectedPackage.value]
   )

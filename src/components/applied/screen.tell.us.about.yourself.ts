@@ -37,6 +37,8 @@ export interface PackageOption {
 
 export type PackageOptions = PackageOption[];
 
+export const toTwoDecimalPlaces = (number: number) => number.toFixed(2);
+
 export enum FieldName {
   name = 'name',
   age = 'age',
