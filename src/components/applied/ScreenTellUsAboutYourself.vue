@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import WizardScreen from '../base/WizardScreen.vue';
-import { computed, ref } from 'vue';
+import { computed, onActivated, ref, toRefs } from 'vue';
 import {
   Country,
   countryOptions,
@@ -18,6 +18,25 @@ import {
 import { ScreenTellUsAboutYourself } from './screen.configurations';
 import { submitFormDataEventName } from '../base/custom.event.names';
 import { RetrievedFormData } from '../form.wizard';
+
+// REF: Handle whether to reset form data
+const props = defineProps({
+  doResetForm: {
+    type: Boolean,
+    default() {
+      return true;
+    },
+  },
+});
+const { doResetForm } = toRefs(props);
+onActivated(() => {
+  if (doResetForm?.value) {
+    name.value = '';
+    age.value = 20;
+    country.value = 'Hong Kong';
+    selectedPackage.value = 'Safe';
+  }
+});
 
 const { title, description, buttons } = ScreenTellUsAboutYourself;
 

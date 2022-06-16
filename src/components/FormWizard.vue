@@ -5,17 +5,13 @@ import {
   ref,
   shallowRef,
   toRefs,
+  watch,
 } from 'vue';
 import {
-  Country,
-  FieldName,
-  PackageType,
-} from './applied/screen.tell.us.about.yourself';
-import {
+  emptyStateFormData,
   RetrievedFormData,
   ScreenName,
   Screens,
-  StringifiedNumber,
 } from './form.wizard';
 
 const props = defineProps<{ vendorName: string; vendorLogo: string }>();
@@ -37,17 +33,35 @@ const screens: Screens = {
   ),
 };
 
+const doResetForm = ref<boolean>(true);
+
+const currentScreenName = ref<ScreenName>('ScreenWelcome');
 const currentScreen = shallowRef(screens.ScreenWelcome);
-const goToScreen = (screenName: ScreenName) => {
-  currentScreen.value = screens[screenName];
+const goToNextScreen = (screenName: ScreenName) => {
+  // NOTE: Always flag form for reset when going forward
+  // NOTE: As form is kept alive, i.e., cached, it will only reset when activated
+  doResetForm.value = true;
+
+  currentScreenName.value = screenName;
+};
+const goToPreviousScreen = (screenName: ScreenName) => {
+  // NOTE: Only flag form for *no* reset if going back to `ScreenTellUsAboutYourself`
+  // NOTE: This only happens when returning form `ScreenSummary`
+  doResetForm.value = screenName !== 'ScreenTellUsAboutYourself';
+
+  currentScreenName.value = screenName;
 };
 
-const validatedFormData = ref<RetrievedFormData>({
-  [FieldName.name]: '' as string,
-  [FieldName.age]: '0' as StringifiedNumber,
-  [FieldName.residence]: 'Hong Kong' as Country,
-  [FieldName.package]: 'Safe' as PackageType,
-  [FieldName.premium]: '0' as StringifiedNumber,
+const validatedFormData = ref<RetrievedFormData>(emptyStateFormData());
+
+watch(currentScreenName, (newCurrentScreen) => {
+  // NOTE: Always reset `validatedFormData` from prior sessions at the first screen
+  if (newCurrentScreen === 'ScreenWelcome') {
+    validatedFormData.value = emptyStateFormData();
+  }
+
+  // NOTE: Switch screen via new screen name
+  currentScreen.value = screens[newCurrentScreen];
 });
 
 const storeFormData = (formData: RetrievedFormData) => {
@@ -67,8 +81,9 @@ const storeFormData = (formData: RetrievedFormData) => {
       <component
         :is="currentScreen"
         :validated-form-data="validatedFormData"
-        @go-to-next-screen="goToScreen"
-        @go-to-previous-screen="goToScreen"
+        :do-reset-form="doResetForm"
+        @go-to-previous-screen="goToPreviousScreen"
+        @go-to-next-screen="goToNextScreen"
         @submit-form-data="storeFormData"
       />
     </keep-alive>
