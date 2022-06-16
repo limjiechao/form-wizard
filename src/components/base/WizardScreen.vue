@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import WizardDescription, {
-  WizardDescriptionConfiguration,
-} from './WizardDescription.vue';
-import WizardButtons, { WizardButtonConfigurations } from './WizardButtons.vue';
+import WizardDescription from './WizardDescription.vue';
+import WizardButtons from './WizardButtons.vue';
 import { defineEmits, defineProps, toRefs } from 'vue';
-import { ScreenName } from '../FormWizard.vue';
 import {
   cannotContinueEventName,
   goToNextScreenEventName,
   goToPreviousScreenEventName,
 } from './custom.event.names';
-
-export interface WizardScreenConfiguration {
-  title: string;
-  description: WizardDescriptionConfiguration;
-  buttons: WizardButtonConfigurations;
-}
+import { ScreenName } from '../wizard.types';
+import { WizardScreenConfiguration } from './wizard.screen';
 
 // REF: https://vuejs.org/api/sfc-script-setup.html#type-only-props-emit-declarations
 const props = defineProps<{

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import WizardScreen from '../base/WizardScreen.vue';
-import { computed, ref, UnwrapRef } from 'vue';
+import { computed, ref } from 'vue';
 import {
   Country,
   countryOptions,
@@ -16,6 +16,7 @@ import {
 } from '../base/form.types.and.constants';
 import { ScreenTellUsAboutYourself } from './screen.configurations';
 import { submitFormDataEventName } from '../base/custom.event.names';
+import { RetrievedFormData } from '../wizard.types';
 
 const { title, description, buttons } = ScreenTellUsAboutYourself;
 
@@ -77,7 +78,6 @@ const updateFormData = (event: Event) => {
 const retrievedFormData = computed(() =>
   Object.fromEntries(formData.value.entries())
 );
-export type RetrievedFormData = UnwrapRef<typeof retrievedFormData>;
 
 // NOTE: Form validation
 const isAgeMoreThanHundred = computed(

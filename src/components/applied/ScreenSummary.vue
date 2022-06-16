@@ -2,13 +2,29 @@
 import WizardScreen from '../base/WizardScreen.vue';
 import { ScreenSummary } from './screen.configurations';
 import { toRefs } from 'vue';
-import { RetrievedFormData } from './ScreenTellUsAboutYourself.vue';
-import { FieldName, FieldLabel } from '../base/form.types.and.constants';
+import { FieldLabel, FieldName } from '../base/form.types.and.constants';
+import { RetrievedFormData } from '../wizard.types';
 
 const props = defineProps<{ validatedFormData: RetrievedFormData }>();
 const { validatedFormData } = toRefs(props);
 
 const { title, description, buttons } = ScreenSummary;
+
+/**
+ * REF: https://vuejs.org/guide/essentials/list.html#v-for-with-an-object
+ *
+ * NOTE: `getFieldLabel(…)` is a workaround for the following line in <template>…</template>
+ *
+ * ```
+ * v-for="(fieldValue, fieldName) in validatedFormData"
+ * ```
+ * TypeScript thinks `validatedFormData` is an array and infers`fieldName` as a number.
+ * But because `validatedFormData` is an object, it's really a key and hence indeed a string.
+ *
+ *  (╯°□°）╯︵ ┻━┻
+ */
+const getFieldLabel = (fieldName: unknown) =>
+  FieldLabel[fieldName as FieldName];
 </script>
 
 <template>
@@ -37,7 +53,10 @@ const { title, description, buttons } = ScreenSummary;
               <h3 class="text-2xl font-semibold text-gray-700">
                 {{ fieldValue }}
               </h3>
-              <p class="text-sm text-gray-500">{{ FieldLabel[fieldName] }}</p>
+
+              <p class="text-sm text-gray-500">
+                {{ getFieldLabel(fieldName) }}
+              </p>
             </div>
           </div>
         </div>

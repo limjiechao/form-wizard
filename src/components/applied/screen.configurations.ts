@@ -1,4 +1,4 @@
-import { WizardScreenConfiguration } from '../base/WizardScreen.vue';
+import { WizardScreenConfiguration } from '../base/wizard.screen';
 
 export const ScreenWelcome: WizardScreenConfiguration = {
   title: 'Hello There!',

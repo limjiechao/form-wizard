@@ -6,25 +6,20 @@ import {
   shallowRef,
   toRefs,
 } from 'vue';
-import { RetrievedFormData } from './applied/ScreenTellUsAboutYourself.vue';
 import {
   Country,
   FieldName,
   PackageType,
 } from './base/form.types.and.constants';
+import {
+  RetrievedFormData,
+  ScreenName,
+  Screens,
+  StringifiedNumber,
+} from './wizard.types';
 
 const props = defineProps<{ vendorName: string; vendorLogo: string }>();
 const { vendorName, vendorLogo } = toRefs(props);
-
-type ScreenPrefix<Name extends string> = `Screen${Name}`;
-export type ScreenName =
-  | ScreenPrefix<'Welcome'>
-  | ScreenPrefix<'TellUsAboutYourself'>
-  | ScreenPrefix<'AgeError'>
-  | ScreenPrefix<'Summary'>;
-
-export type AsyncComponent = ReturnType<typeof defineAsyncComponent>;
-type Screens = Record<ScreenName, AsyncComponent>;
 
 // REF: https://vuejs.org/guide/components/async.html#async-components
 const screens: Screens = {
@@ -47,7 +42,6 @@ const goToScreen = (screenName: ScreenName) => {
   currentScreen.value = screens[screenName];
 };
 
-type StringifiedNumber = `${number}`;
 const validatedFormData = ref<RetrievedFormData>({
   [FieldName.name]: '' as string,
   [FieldName.age]: '0' as StringifiedNumber,
