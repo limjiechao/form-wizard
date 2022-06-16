@@ -7,7 +7,7 @@ import {
   goToNextScreenEventName,
   goToPreviousScreenEventName,
 } from './custom.event.names';
-import { ScreenName } from '../wizard.types';
+import { ScreenName } from '../form.wizard';
 import { WizardScreenConfiguration } from './wizard.screen';
 
 // REF: https://vuejs.org/api/sfc-script-setup.html#type-only-props-emit-declarations

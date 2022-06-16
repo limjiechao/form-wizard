@@ -1,4 +1,4 @@
-import { AsyncComponent, ScreenName } from '../wizard.types';
+import { AsyncComponent, ScreenName } from '../form.wizard';
 import {
   goToNextScreenEventName,
   goToPreviousScreenEventName,

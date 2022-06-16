@@ -16,7 +16,7 @@ import {
   ScreenName,
   Screens,
   StringifiedNumber,
-} from './wizard.types';
+} from './form.wizard';
 
 const props = defineProps<{ vendorName: string; vendorLogo: string }>();
 const { vendorName, vendorLogo } = toRefs(props);
