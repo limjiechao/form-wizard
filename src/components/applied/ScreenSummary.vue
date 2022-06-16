@@ -2,7 +2,7 @@
 import WizardScreen from '../base/WizardScreen.vue';
 import { ScreenSummary } from './screen.configurations';
 import { toRefs } from 'vue';
-import { FieldLabel, FieldName } from '../base/form.types.and.constants';
+import { FieldLabel, FieldName } from './screen.tell.us.about.yourself';
 import { RetrievedFormData } from '../wizard.types';
 
 const props = defineProps<{ validatedFormData: RetrievedFormData }>();

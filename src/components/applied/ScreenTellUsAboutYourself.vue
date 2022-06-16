@@ -13,7 +13,7 @@ import {
   PackageOptions,
   PackageType,
   rate,
-} from '../base/form.types.and.constants';
+} from './screen.tell.us.about.yourself';
 import { ScreenTellUsAboutYourself } from './screen.configurations';
 import { submitFormDataEventName } from '../base/custom.event.names';
 import { RetrievedFormData } from '../wizard.types';

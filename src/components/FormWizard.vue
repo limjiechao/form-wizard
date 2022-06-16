@@ -10,7 +10,7 @@ import {
   Country,
   FieldName,
   PackageType,
-} from './base/form.types.and.constants';
+} from './applied/screen.tell.us.about.yourself';
 import {
   RetrievedFormData,
   ScreenName,
