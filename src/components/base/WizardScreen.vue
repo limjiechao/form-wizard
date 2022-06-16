@@ -28,7 +28,7 @@ const emit = defineEmits<{
 }>();
 
 const goToPreviousScreen = ($event: ScreenName) => {
-  emit(goToNextScreenEventName, $event);
+  emit(goToPreviousScreenEventName, $event);
 };
 
 const goToNextScreen = ($event: ScreenName) => {
