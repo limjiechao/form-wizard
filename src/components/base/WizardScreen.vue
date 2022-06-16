@@ -1,0 +1,75 @@
+<script setup lang="ts">
+import WizardDescription, {
+  WizardDescriptionConfiguration,
+} from './WizardDescription.vue';
+import WizardButtons, { WizardButtonConfigurations } from './WizardButtons.vue';
+import { defineEmits, defineProps, toRefs } from 'vue';
+import { ScreenName } from '../FormWizard.vue';
+import {
+  cannotContinueEventName,
+  goToNextScreenEventName,
+  goToPreviousScreenEventName,
+} from './custom.event.names';
+
+export interface WizardScreenConfiguration {
+  title: string;
+  description: WizardDescriptionConfiguration;
+  buttons: WizardButtonConfigurations;
+}
+
+// REF: https://vuejs.org/api/sfc-script-setup.html#type-only-props-emit-declarations
+const props = defineProps<{
+  title: WizardScreenConfiguration['title'];
+  description: WizardScreenConfiguration['description'];
+  buttons: WizardScreenConfiguration['buttons'];
+  canContinue: boolean;
+  redirectToScreen?: ScreenName;
+}>();
+const { description, buttons, canContinue, redirectToScreen } = toRefs(props);
+
+// REF: https://vuejs.org/api/sfc-script-setup.html#type-only-props-emit-declarations
+const emit = defineEmits<{
+  (event: typeof goToNextScreenEventName, screenName: ScreenName): void;
+  (event: typeof goToPreviousScreenEventName, screenName: ScreenName): void;
+  (event: typeof cannotContinueEventName): void;
+}>();
+
+const goToPreviousScreen = ($event: ScreenName) => {
+  emit(goToNextScreenEventName, $event);
+};
+
+const goToNextScreen = ($event: ScreenName) => {
+  if (canContinue.value) {
+    emit(
+      goToNextScreenEventName,
+      redirectToScreen?.value ? redirectToScreen.value : $event
+    );
+  } else {
+    emit(cannotContinueEventName);
+  }
+};
+</script>
+
+<template>
+  <div
+    class="flex flex-col items-center gap-6 border border-gray-200 bg-gray-50 rounded-lg shadow-sm p-6"
+  >
+    <h1 class="text-2xl font-bold text-gray-700">
+      {{ title }}
+    </h1>
+
+    <WizardDescription v-if="description.length" :description="description" />
+
+    <slot />
+
+    <div v-if="buttons.length" class="flex gap-4">
+      <WizardButtons
+        @go-to-previous-screen="goToPreviousScreen($event)"
+        @go-to-next-screen="goToNextScreen($event)"
+        :buttons="buttons"
+      />
+    </div>
+  </div>
+</template>
+
+<style scoped></style>
