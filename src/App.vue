@@ -5,7 +5,7 @@ import FormWizard from './components/FormWizard.vue';
 </script>
 
 <template>
-  <FormWizard vendor-name="CoverGo" vendor-logo="src/assets/logo-blue.svg" />
+  <FormWizard />
 </template>
 
 <style>

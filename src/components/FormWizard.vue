@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import {
-  defineAsyncComponent,
-  defineProps,
-  ref,
-  shallowRef,
-  toRefs,
-  watch,
-} from 'vue';
+import { defineAsyncComponent, ref, shallowRef, watch } from 'vue';
 import {
   emptyStateFormData,
   RetrievedFormData,
   ScreenName,
   Screens,
 } from './form.wizard';
-
-const props = defineProps<{ vendorName: string; vendorLogo: string }>();
-const { vendorName, vendorLogo } = toRefs(props);
 
 // REF: https://vuejs.org/guide/components/async.html#async-components
 const screens: Screens = {
@@ -73,8 +63,8 @@ const storeFormData = (formData: RetrievedFormData) => {
   <div id="form-wizard" class="flex flex-col p-4 items-center gap-4">
     <img
       class="w-1/5 min-w-[12rem] max-w-sm"
-      :alt="`${vendorName} logo`"
-      :src="vendorLogo"
+      :alt="`CoverGo logo`"
+      src="../assets/logo-blue.svg"
     />
 
     <keep-alive>
