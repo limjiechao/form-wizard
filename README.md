@@ -20,11 +20,10 @@ https://user-images.githubusercontent.com/32322600/174071772-8882e30a-5315-445c-
 
 https://user-images.githubusercontent.com/32322600/174071809-9b5ab606-2e5e-4a0f-9af7-b4c0f42a2c5f.mp4
 
-##Selecting country and choosing package
-
-https://user-images.githubusercontent.com/32322600/174071838-9f51ec6f-bfca-4ac8-b20f-a806a0a4c21c.mp4
-
-## Returning to form from summary
+## Selecting country and choosing package
 
 https://user-images.githubusercontent.com/32322600/174071828-d09f4bac-3a00-4ef2-b6d0-68be977e198c.mp4
 
+## Returning to form from summary
+
+https://user-images.githubusercontent.com/32322600/174071838-9f51ec6f-bfca-4ac8-b20f-a806a0a4c21c.mp4
