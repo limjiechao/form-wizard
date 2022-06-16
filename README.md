@@ -1,16 +1,30 @@
-# Vue 3 + TypeScript + Vite
+# Demo Videos
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Happy path
 
-## Recommended IDE Setup
+https://user-images.githubusercontent.com/32322600/174071654-176749f4-c1ed-43a0-a6b7-91cf48418860.mp4
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## Empty name field
 
-## Type Support For `.vue` Imports in TS
+https://user-images.githubusercontent.com/32322600/174071719-7399922f-f077-4fa1-a9ea-7b542b03db68.mp4
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+## Empty number field
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+https://user-images.githubusercontent.com/32322600/174071750-594d682f-0507-459b-ba54-9685b318ab6b.mp4
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+## Invalid age input
+
+https://user-images.githubusercontent.com/32322600/174071772-8882e30a-5315-445c-abec-d307e45b77ee.mp4
+
+## Age is outside insurable range
+
+https://user-images.githubusercontent.com/32322600/174071809-9b5ab606-2e5e-4a0f-9af7-b4c0f42a2c5f.mp4
+
+##Selecting country and choosing package
+
+https://user-images.githubusercontent.com/32322600/174071838-9f51ec6f-bfca-4ac8-b20f-a806a0a4c21c.mp4
+
+## Returning to form from summary
+
+https://user-images.githubusercontent.com/32322600/174071828-d09f4bac-3a00-4ef2-b6d0-68be977e198c.mp4
+
