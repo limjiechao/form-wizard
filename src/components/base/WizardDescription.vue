@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
-
-export type WizardDescriptionConfiguration = string[];
+import { WizardDescriptionConfiguration } from './wizard.description';
 
 const props = defineProps<{ description: WizardDescriptionConfiguration }>();
 const { description } = toRefs(props);

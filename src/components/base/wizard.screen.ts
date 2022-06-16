@@ -1,5 +1,5 @@
-import { WizardDescriptionConfiguration } from './WizardDescription.vue';
 import { WizardButtonConfigurations } from './wizard.buttons';
+import { WizardDescriptionConfiguration } from './wizard.description';
 
 export interface WizardScreenConfiguration {
   title: string;
